@@ -1,0 +1,113 @@
+/* @import url('../../utils/variables.module.css'); */
+
+.container {
+    min-width: 320px;
+    width: 100%;
+}
+
+.navContainer {
+    padding-top: 20px;
+    padding-right: 6.25%;
+    padding-bottom: 16px;
+    padding-left: 6.25%;
+    border-bottom: 2px solid #E0E0E0;
+}
+
+.childrenContainer {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+    color: #9B9FAA;
+    flex: 0 0 auto;
+}
+
+@media (min-width:768px) {
+    .container {
+        min-width: 768px;
+        width: 100%;
+        height: 1024px;
+    }
+
+    .images {
+        position: relative;
+        background-repeat: no-repeat;
+        background-image:
+            url(../../assets/img/strawberryTablet.png), url(../../assets/img/LayerTablet.png), url(../../assets/img/bananaTablet.png), url(../../assets/img/vectorTablet.png);
+        background-position: 90% 75%, bottom left, bottom right,
+            bottom right;
+    }
+
+    .navContainer {
+        padding-top: 20px;
+        padding-right: 32px;
+        padding-bottom: 16px;
+        padding-left: 32px;
+        border-bottom: 2px solid #E0E0E0;
+    }
+
+    .childrenContainer {
+        padding-right: 32px;
+        padding-left: 32px;
+    }
+
+    .list__firstItem {
+        margin-right: 342px;
+    }
+}
+
+@media (min-width:1279px) {
+    .container {
+        min-width: 1279px;
+        width: 100%;
+        height: 850px;
+    }
+
+    .images {
+        position: relative;
+        background-repeat: no-repeat;
+        background-image:
+            url(../../assets/img/fullBack.png), url(../../assets/img/vectorDesktop.png);
+        background-position: bottom right, bottom right
+    }
+
+    .navContainer {
+        padding-top: 80px;
+        padding-left: 16px;
+        padding-right: 100%;
+        padding-bottom: 16px;
+        border-bottom: 0px none #E0E0E0;
+    }
+
+    .list {
+        justify-content: flex-start;
+        gap: 37px;
+        align-items: baseline;
+    }
+
+    .list__firstItem {
+        margin-right: 0px;
+    }
+
+    .list__secondItem {
+        border-left: 2px solid #E0E0E0;
+        padding-left: 20px;
+    }
+
+    .childrenContainer {
+        padding-right: 32px;
+        padding-left: 16px;
+    }
+}
