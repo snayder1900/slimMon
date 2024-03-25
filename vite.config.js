@@ -4,5 +4,4 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: 'https://snayder1900.github.io/slim-mom',
 })
