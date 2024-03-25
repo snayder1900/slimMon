@@ -18,25 +18,35 @@ const DailyCaloriesForm = () => {
         }}
         validate={(values) => {
           let errors = {};
+          const validateNumber = /^\d+$/;
+
           if (!values.height) {
             errors.height = "Por favor diligenciar la altura";
+          } else if (!validateNumber.test(values.height)) {
+            errors.height = "Campo debe ser numerico";
           }
-
           if (!values.age) {
             errors.age = "Por favor diligenciar la edad ";
+          } else if (!validateNumber.test(values.age)) {
+            errors.age = "Campo debe ser numerico";
           }
 
           if (!values.currentWeight) {
             errors.currentWeight = "Por favor diligenciar peso actual ";
+          } else if (!validateNumber.test(values.currentWeight)) {
+            errors.currentWeight = "Campo debe ser numerico";
           }
 
           if (!values.desiredWeight) {
             errors.desiredWeight = "Por favor diligenciar peso deseado ";
+          } else if (!validateNumber.test(values.desiredWeight)) {
+            errors.desiredWeight = "Campo debe ser numerico";
           }
 
           if (!values.picked) {
             errors.picked = "Por favor diligenciar tipo de sangre";
           }
+
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
@@ -44,14 +54,7 @@ const DailyCaloriesForm = () => {
           console.log("formulario enviado");
         }}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleSubmit,
-          handleChange,
-          handleBlur,
-        }) => (
+        {({ errors, touched }) => (
           <Form>
             <ul className={css.list}>
               <li className={css.listItem}>
@@ -180,7 +183,7 @@ const DailyCaloriesForm = () => {
               </li>
               {Object.keys(errors).length > 0 && (
                 <div className={css.label_error}>
-                  Campos subrayados en rojo son obligatorios
+                  {Object.values(errors)[0]}
                 </div>
               )}
             </ul>
