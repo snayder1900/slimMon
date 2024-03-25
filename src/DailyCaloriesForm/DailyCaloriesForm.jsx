@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Field } from "formik";
+import { Formik, Form, Field } from "formik";
 import css from "./DailyCaloriesForm.module.css";
 
 const DailyCaloriesForm = () => {
@@ -14,7 +14,7 @@ const DailyCaloriesForm = () => {
           age: "",
           currentWeight: "",
           desiredWeight: "",
-          bloodType: 0,
+          picked: "",
         }}
         validate={(values) => {
           let errors = {};
@@ -34,8 +34,8 @@ const DailyCaloriesForm = () => {
             errors.desiredWeight = "Por favor diligenciar peso deseado ";
           }
 
-          if (!values.bloodType) {
-            errors.bloodType = "Por favor diligenciar tipo de sangre";
+          if (!values.picked) {
+            errors.picked = "Por favor diligenciar tipo de sangre";
           }
           return errors;
         }}
@@ -52,7 +52,7 @@ const DailyCaloriesForm = () => {
           handleChange,
           handleBlur,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <Form>
             <ul className={css.list}>
               <li className={css.listItem}>
                 <div
@@ -65,16 +65,12 @@ const DailyCaloriesForm = () => {
                   <label className={css.label} htmlFor="">
                     Altura *
                   </label>
-                  <input
+                  <Field
                     type="text"
                     className={css.inputMobile}
                     name="height"
-                    value={values.height}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
                   />
                 </div>
-                {/* errors.height ? css.lisContainer_error : */}
               </li>
               <li className={css.listItem}>
                 <div
@@ -87,14 +83,7 @@ const DailyCaloriesForm = () => {
                   <label className={css.label} htmlFor="">
                     Edad *
                   </label>
-                  <input
-                    type="text"
-                    className={css.inputMobile}
-                    name="age"
-                    value={values.age}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
+                  <Field type="text" className={css.inputMobile} name="age" />
                 </div>
               </li>
               <li className={css.listItem}>
@@ -108,13 +97,10 @@ const DailyCaloriesForm = () => {
                   <label className={css.label} htmlFor="">
                     Peso actual *
                   </label>
-                  <input
+                  <Field
                     type="text"
                     className={css.inputMobile}
                     name="currentWeight"
-                    value={values.currentWeight}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
                   />
                 </div>
               </li>
@@ -129,107 +115,66 @@ const DailyCaloriesForm = () => {
                   <label className={css.label} htmlFor="">
                     Peso deseado *
                   </label>
-                  <input
+                  <Field
                     type="text"
                     className={css.inputMobile}
                     name="desiredWeight"
-                    value={values.desiredWeight}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
                   />
                 </div>
               </li>
               <li>
                 <div className={css.lisContainer__blood}>
-                  <label
+                  <div
+                    id="my-radio-group"
                     className={`${css.label} ${
-                      touched.bloodType && errors.bloodType
+                      touched.picked && errors.picked
                         ? css.label__blood_error
                         : css.label__blood
                     }`}
-                    htmlFor=""
                   >
                     Tipo de sangre *
-                  </label>
-                  <div className={css.inputMobile__bloodContainer}>
-                    <div className={css.inputMobile__bloodContainer__option}>
-                      <input
+                  </div>
+                  <div
+                    role="group"
+                    aria-labelledby="my-radio-group"
+                    className={css.inputMobile__bloodContainer}
+                  >
+                    <label className={`${css.label}`}>
+                      <Field
                         type="radio"
-                        id="1"
-                        name="bloodType"
-                        value={values.bloodType}
+                        name="picked"
+                        value="One"
                         className={css.inputMobile__blood}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      <label htmlFor="1" className={`${css.label}`}>
-                        1
-                      </label>
-                    </div>
-                    <div className={css.inputMobile__bloodContainer__option}>
-                      <input
+                      1
+                    </label>
+                    <label className={`${css.label}`}>
+                      <Field
                         type="radio"
-                        id="2"
-                        name="bloodType"
-                        value={values.bloodType}
+                        name="picked"
+                        value="Two"
                         className={css.inputMobile__blood}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      <label htmlFor="2" className={css.label}>
-                        2
-                      </label>
-                    </div>
-                    <div className={css.inputMobile__bloodContainer__option}>
-                      <input
+                      2
+                    </label>
+                    <label className={`${css.label}`}>
+                      <Field
                         type="radio"
-                        id="3"
-                        name="bloodType"
-                        value={values.bloodType}
+                        name="picked"
+                        value="Three"
                         className={css.inputMobile__blood}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      <label htmlFor="3" className={css.label}>
-                        3
-                      </label>
-                    </div>
-                    <div className={css.inputMobile__bloodContainer__option}>
-                      <input
+                      3
+                    </label>
+                    <label className={`${css.label}`}>
+                      <Field
                         type="radio"
-                        id="4"
-                        name="bloodType"
-                        value={values.bloodType}
+                        name="picked"
+                        value="Four"
                         className={css.inputMobile__blood}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
                       />
-                      <label htmlFor="4" className={`${css.label}`}>
-                        4
-                      </label>
-                    </div>
-
-                    <div
-                      id="my-radio-group"
-                      className={`${css.label} ${
-                        touched.bloodType && errors.bloodType
-                          ? css.label__blood_error
-                          : css.label__blood
-                      }`}
-                    >
-                      Tipo de sangre *
-                    </div>
-                    <div role="group" aria-labelledby="my-radio-group">
-                      <label>
-                        <Field type="radio" name="picked" value="One" />
-                        One
-                      </label>
-                      <label>
-                        <Field type="radio" name="picked" value="Two" />
-                        Two
-                      </label>
-                      <div>Picked: {values.picked}</div>
-                    </div>
+                      4
+                    </label>
                   </div>
                 </div>
               </li>
@@ -242,7 +187,7 @@ const DailyCaloriesForm = () => {
             <div className={css.buttonContainer}>
               <button type="submit">Empezar a perder peso</button>
             </div>
-          </form>
+          </Form>
         )}
       </Formik>
     </div>
