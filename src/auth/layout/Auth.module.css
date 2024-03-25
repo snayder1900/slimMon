@@ -2,7 +2,7 @@
   position: relative;
   padding: 0 16px;
   width: 1280px;
-  margin: 0 auto;
+  margin-top: 18.82352941%;
 }
 
 .roboto-regular {
@@ -16,6 +16,7 @@
   font-weight: 700;
   font-style: normal;
 }
+
 .active {
   color: #000000 !important;
 }
@@ -34,24 +35,28 @@
   font-weight: 700;
   letter-spacing: 0.04em;
 }
+
 .verticalBar__container {
   height: 0;
   height: 32px;
   border: 2px solid #E0E0E0;
   margin-top: 40px;
 }
+
 .navContainer ul {
   padding: 0;
   display: flex;
   column-gap: 20px;
   padding-top: 52px;
 }
+
 .navContainer__item {
   list-style: none;
 }
+
 .navContainer__link {
   text-decoration: none;
-  color:#9B9FAA;
+  color: #9B9FAA;
   font-size: 14px;
 }
 
@@ -63,20 +68,25 @@
   font-weight: 700;
   letter-spacing: 0.04em;
 }
+
 .form__title {
   color: #FC842D;
   margin-bottom: 55px;
   font-size: 14px;
 }
+
 .form__container {
   margin-bottom: 60px;
 }
+
 .form__container:nth-of-type(2) {
   margin-bottom: 20px;
 }
+
 .form__section:first-of-type {
   margin-bottom: 20px;
 }
+
 .form__section:nth-of-type(2) {
   margin-bottom: 20px;
 }
@@ -84,6 +94,7 @@
 input:focus {
   outline: none;
 }
+
 .form__name {
   font-size: 14px;
   font-family: "Roboto", sans-serif;
@@ -93,6 +104,7 @@ input:focus {
   border: none;
   border-bottom: 1px solid #E0E0E0;
 }
+
 .form__email {
   font-size: 14px;
   font-family: "Roboto", sans-serif;
@@ -102,6 +114,7 @@ input:focus {
   border: none;
   border-bottom: 1px solid #E0E0E0;
 }
+
 .form__password {
   font-size: 14px;
   font-family: "Roboto", sans-serif;
@@ -111,6 +124,7 @@ input:focus {
   border: none;
   border-bottom: 1px solid #E0E0E0;
 }
+
 .form__login {
   background: #FC842D;
   display: inline-block;
@@ -123,6 +137,7 @@ input:focus {
   font-size: 14px;
 
 }
+
 .form__createAccount {
   border: 2px solid #FC842D;
   display: inline-block;
@@ -138,18 +153,21 @@ input:focus {
   top: 0;
   left: 800px;
 }
+
 .form__img2 {
   position: absolute;
   top: 500px;
   left: 900px;
   z-index: -5;
 }
+
 .form__img3 {
   position: absolute;
   top: 0;
   left: 330px;
   z-index: -1;
 }
+
 .form__img4 {
   position: absolute;
   top: 50px;

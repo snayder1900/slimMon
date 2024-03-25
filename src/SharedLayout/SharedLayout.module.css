@@ -14,8 +14,8 @@
 }
 
 .childrenContainer {
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 6.25%;
+    padding-left: 6.25%;
 }
 
 .list {
@@ -38,7 +38,8 @@
     .container {
         min-width: 768px;
         width: 100%;
-        height: 1024px;
+        min-height: 100vh;
+        height: auto;
     }
 
     .images {
@@ -48,23 +49,24 @@
             url(../../assets/img/strawberryTablet.png), url(../../assets/img/LayerTablet.png), url(../../assets/img/bananaTablet.png), url(../../assets/img/vectorTablet.png);
         background-position: 90% 75%, bottom left, bottom right,
             bottom right;
+        height: 100%;
     }
 
     .navContainer {
         padding-top: 20px;
         padding-right: 32px;
         padding-bottom: 16px;
-        padding-left: 32px;
+        padding-left: 4.166666667%;
         border-bottom: 2px solid #E0E0E0;
     }
 
     .childrenContainer {
-        padding-right: 32px;
-        padding-left: 32px;
+        padding-right: 4.166666667%;
+        padding-left: 4.166666667%;
     }
 
     .list__firstItem {
-        margin-right: 342px;
+        margin-right: 44.53125%;
     }
 }
 
@@ -72,7 +74,7 @@
     .container {
         min-width: 1279px;
         width: 100%;
-        height: 850px;
+        height: 100%;
     }
 
     .images {
@@ -85,10 +87,15 @@
 
     .navContainer {
         padding-top: 80px;
-        padding-left: 16px;
+        padding-left: 1.25%;
         padding-right: 100%;
         padding-bottom: 16px;
         border-bottom: 0px none #E0E0E0;
+    }
+
+    .childrenContainer {
+        padding-right: 2.5%;
+        padding-left: 1.25%;
     }
 
     .list {
@@ -104,10 +111,5 @@
     .list__secondItem {
         border-left: 2px solid #E0E0E0;
         padding-left: 20px;
-    }
-
-    .childrenContainer {
-        padding-right: 32px;
-        padding-left: 16px;
     }
 }

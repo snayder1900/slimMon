@@ -35,10 +35,10 @@ export const SharedLayout = () => {
             </Link>
           </li>
           <li className={`${css.menu} ${css.list__secondItem}`}>
-            <Link to="/">INICIAR SESIÓN</Link>
+            <Link to="login">INICIAR SESIÓN</Link>
           </li>
           <li className={css.menu}>
-            <Link to="/">REGISTRO</Link>
+            <Link to="register">REGISTRO</Link>
           </li>
         </ul>
       </div>
