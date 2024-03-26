@@ -14,7 +14,7 @@ const DailyCaloriesForm = () => {
           age: "",
           currentWeight: "",
           desiredWeight: "",
-          picked: "",
+          bloodType: "",
         }}
         validate={(values) => {
           let errors = {};
@@ -145,7 +145,7 @@ const DailyCaloriesForm = () => {
                     <label className={`${css.label}`}>
                       <Field
                         type="radio"
-                        name="picked"
+                        name="bloodType"
                         value="One"
                         className={css.inputMobile__blood}
                       />
@@ -154,7 +154,7 @@ const DailyCaloriesForm = () => {
                     <label className={`${css.label}`}>
                       <Field
                         type="radio"
-                        name="picked"
+                        name="bloodType"
                         value="Two"
                         className={css.inputMobile__blood}
                       />
@@ -163,7 +163,7 @@ const DailyCaloriesForm = () => {
                     <label className={`${css.label}`}>
                       <Field
                         type="radio"
-                        name="picked"
+                        name="bloodType"
                         value="Three"
                         className={css.inputMobile__blood}
                       />
@@ -172,7 +172,7 @@ const DailyCaloriesForm = () => {
                     <label className={`${css.label}`}>
                       <Field
                         type="radio"
-                        name="picked"
+                        name="bloodType"
                         value="Four"
                         className={css.inputMobile__blood}
                       />
