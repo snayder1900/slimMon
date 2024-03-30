@@ -1,8 +1,38 @@
 import { Link, NavLink } from "react-router-dom";
 import css from "./Auth.module.css";
+import { useForm } from "../../hooks";
+// import {useForm} from 'react-hook-form';
+
+
+const loginFormFields = {
+  loginEmail:    '',
+  loginPassword: '',
+}
+
+const registerFormFields = {
+  registerName:      '',
+  registerEmail:     '',
+  registerPassword:  '',
+}
+
 
 
 export const AuthLayout = ({children, title = ''}) => {
+
+  // const {register, handleSubmit} = useForm();
+  const { loginEmail, loginPassword, onInputChange:onLoginInputChange } = useForm( loginFormFields );
+  const { registerName, registerEmail, registerPassword, onInputChange:onRegisterInputChange} = useForm(registerFormFields)
+
+  const loginSubmit = ( event ) => {
+    event.preventDefault();
+    console.log({loginEmail, loginPassword});
+  }
+
+  const registerSubmit = (event) => {
+    event.preventDefault();
+    console.log({registerName,registerEmail, registerPassword});
+  }
+
   return (
     <div className={css.container}>
       <nav className={css.navContainer}>
@@ -41,21 +71,40 @@ export const AuthLayout = ({children, title = ''}) => {
         </ul>
       </nav>
 
-      <form action="" className={css.form}>
+      <form onSubmit={loginSubmit} action="" className={css.form}>
         <h1 className={css.form__title}>{title}</h1>
         {/* <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum modi minima maiores asperiores pariatur molestiae libero sunt sint laborum veniam repellat error cumque consequatur officiis neque voluptatum ducimus, quaerat quae?</p> */}
         <div className={css.form__container}>
           {children}
           <section className={css.form__section}>
-            <input className={css.form__email} type="email" placeholder="Correo electrónico *"/>
+            <input 
+              className={css.form__email} 
+              type="email" 
+              placeholder="Correo electrónico *" 
+              // {...register('email')}
+              name="loginEmail" 
+              value={loginEmail}
+              onChange={onLoginInputChange}
+            />
           </section>
           <section className={css.form__section}>
-            <input className={css.form__password} type="password" placeholder="Contraseña *"/>
+            <input 
+              className={css.form__password} 
+              type="password" 
+              placeholder="Contraseña *"
+              name="loginPassword" 
+              value={loginPassword}
+              onChange={onLoginInputChange}
+              // {...register('password')}
+            />
           </section>
         </div>
         <div className={css.form__container}>
-          <Link className={css.form__login}>INICIAR SESIÓN</Link>
-          {/* Pendiente  cargar pagina siguiente */}
+          <button type="submit">
+            INICIAR SESION
+            {/* <Link className={css.form__login}>INICIAR SESIÓN</Link> */}
+            {/* Pendiente  cargar pagina siguiente */}
+          </button>
           <Link className={css.form__createAccount} to="/auth/register">
             CREAR UNA CUENTA
           </Link>

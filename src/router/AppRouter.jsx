@@ -1,24 +1,49 @@
+import { useEffect } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import { AuthRoutes } from "../auth/routes/AuthRoutes"
 import { CaloriesPage } from "../calories/pages/CaloriesPage"
+import { useAuthStore } from "../hooks"
 
 
 export const AppRouter = () => {
 
-  const authStatus = 'not-authenticated';
+  const { status, checkAuthToken } = useAuthStore();
+  // const authStatus = 'not-authenticated';
+
+  useEffect(() => {
+    checkAuthToken();
+  }, [])
+
+  if( status === 'checking' ) {
+    return (
+      <h3>Cargando</h3>
+    )
+  }
+  
 
   return (
     <Routes>
-      {
-        ( authStatus ===  'not-authenticated' )
-          ? <Route path="/auth/*" element={<AuthRoutes />} />
-          : <Route path="/*" element={<CaloriesPage />} />
+      {                
+        // ( status ===  'not-authenticated' )
+        //   ? <Route path="/auth/*" element={<AuthRoutes />} />
+        //   : <Route path="/*" element={<CaloriesPage />} />
+        ( status ===  'not-authenticated' )
+          ? (
+            <>
+              <Route path="/auth/*" element={<AuthRoutes />} />
+              {/* evitar que el usuario llegue a una ruta que no existe */}
+              <Route path="/*" element={<Navigate to="/auth/login"/>} />
+            </>
+          )
+          : (
+            <>
+              <Route path="/" element={<CaloriesPage />} />
+              {/* evitar que el usuario llegue a una ruta que no existe */}
+              <Route path="/*" element={<Navigate to="/"/>} />
+            </>
+          )
       }
 
-          {/* Login y Registro */}
-          {/* Calories */}
-          {/* evitar que el usuario llegue a una ruta que no existe */}
-          <Route path="/*" element={<Navigate to="/auth/login"/>} />
     </Routes>
   )
 }

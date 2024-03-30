@@ -2,6 +2,11 @@
 
 export const Navbar = () => {
   return (
-    <div>Navbar</div>
+    <div>
+      <span>User</span>
+      <button>
+        <span>Salir</span>
+      </button>
+    </div>
   )
 }
