@@ -1,8 +1,29 @@
 import { Link, NavLink } from "react-router-dom";
 import css from "./Auth.module.css";
+import getProductsApi from "../../services/getProducts";
+import React, { useState, useEffect } from 'react';
 
 
-export const AuthLayout = ({children, title = ''}) => {
+
+
+export const AuthLayout = ({ children, title = '' }) => {
+const [datos, setDatos] = useState([]);
+  const handleClick = async () => {
+     try {
+      const response = await fetch('mongodb+srv://tester:DjVbPf2qSqd7nbUM@cluster0.7ju6kgj.mongodb.net/slimmom-api?retryWrites=true&w=majority');
+      if (!response.ok) {
+        throw new Error('Fallo al obtener los datos');
+      }
+      const data = await response.json();
+      setDatos(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
+  };
+
+
+
   return (
     <div className={css.container}>
       <nav className={css.navContainer}>
@@ -22,6 +43,7 @@ export const AuthLayout = ({children, title = ''}) => {
             <NavLink
               className={ ({isActive}) => `${css.navContainer__link} ${isActive ? css.active :  ''}` } 
               to={"/auth/login"}
+              onClick={handleClick} 
             >
                 INICIAR SESIÓN
             </NavLink>
