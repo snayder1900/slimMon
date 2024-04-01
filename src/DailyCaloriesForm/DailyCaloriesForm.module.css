@@ -138,7 +138,7 @@ form {
     justify-content: center;
 }
 
-button {
+.loseWeightBtn {
     background-color: #FC842D;
     margin-top: 40px;
     padding-top: 14px;
@@ -153,7 +153,6 @@ button {
     font-size: 14px;
     color: #FFFFFF;
     box-shadow: 0 6px 8px 0 rgb(252, 132, 45, 0.2), 0 6px 20px 0 rgb(252, 132, 45, 0.19);
-
 }
 
 @media (min-width:767px) {

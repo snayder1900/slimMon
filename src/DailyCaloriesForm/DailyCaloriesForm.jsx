@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import css from "./DailyCaloriesForm.module.css";
+// import { i } from "vite/dist/node/types.d-FdqQ54oU";
+import Modal from "../components/Modal";
+import { getDataModal } from "../services/slimmomApi";
 
 const DailyCaloriesForm = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [formData, setFormData] = useState({
+    height: "",
+    age: "",
+    currentWeight: "",
+    desiredWeight: "",
+    bloodType: "",
+  });
+  const [dailyRateInfo, setDailyRateInfo] = useState(0);
+  const [notAllowed, setNotAllowed] = useState([]);
+  const formHandle = async (event) => {
+    event.preventDefault();
+    try {
+      const { result } = await getDataModal("products", formData);
+      setDailyRateInfo(result.dailyRate);
+      setNotAllowed(result.notAllowedProducts);
+    } catch (error) {
+      console.error("error al enviar datos:", error.message);
+    }
+  };
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const clickHandler = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   return (
     <div className={`${css.container}`}>
       <h1 className={css.tittle}>
@@ -50,6 +82,7 @@ const DailyCaloriesForm = () => {
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
+          formHandle();
           resetForm();
           console.log("formulario enviado");
         }}
@@ -72,6 +105,8 @@ const DailyCaloriesForm = () => {
                     type="text"
                     className={css.inputMobile}
                     name="height"
+                    value={formData.height}
+                    onChange={handleChange}
                   />
                 </div>
               </li>
@@ -86,7 +121,13 @@ const DailyCaloriesForm = () => {
                   <label className={css.label} htmlFor="">
                     Edad *
                   </label>
-                  <Field type="text" className={css.inputMobile} name="age" />
+                  <Field
+                    type="text"
+                    className={css.inputMobile}
+                    name="age"
+                    value={formData.age}
+                    onChange={handleChange}
+                  />
                 </div>
               </li>
               <li className={css.listItem}>
@@ -104,6 +145,8 @@ const DailyCaloriesForm = () => {
                     type="text"
                     className={css.inputMobile}
                     name="currentWeight"
+                    value={formData.currentWeight}
+                    onChange={handleChange}
                   />
                 </div>
               </li>
@@ -122,6 +165,8 @@ const DailyCaloriesForm = () => {
                     type="text"
                     className={css.inputMobile}
                     name="desiredWeight"
+                    value={formData.desiredWeight}
+                    onChange={handleChange}
                   />
                 </div>
               </li>
@@ -188,11 +233,24 @@ const DailyCaloriesForm = () => {
               )}
             </ul>
             <div className={css.buttonContainer}>
-              <button type="submit">Empezar a perder peso</button>
+              <button
+                onClick={clickHandler}
+                type="submit"
+                className={css.loseWeightBtn}
+              >
+                Empezar a perder peso
+              </button>
             </div>
           </Form>
         )}
       </Formik>
+      {isModalOpen && (
+        <Modal
+          toggleModal={clickHandler}
+          dailyRate={dailyRateInfo}
+          notAllowedProducts={notAllowed.slice(0, 4)}
+        />
+      )}
     </div>
   );
 };

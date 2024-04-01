@@ -1,0 +1,164 @@
+.backdrop {
+    background-color: rgba(33, 33, 33, 0.12);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+}
+
+.modal {
+    width: 672px;
+    height: 574px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0px 22px 40px rgba(0, 0, 0, 0.1);
+}
+
+.modal_button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_button:hover {
+    cursor: pointer;
+}
+
+.close {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+}
+
+.modal_button:hover .close {
+    fill: #fc842d;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    width: 508px;
+    height: 70px;
+}
+
+.title_movil {
+    display: none;
+}
+
+.number {
+    font-size: 48px;
+    color: rgba(38, 64, 97, 1);
+    font-weight: 700;
+    margin: 0;
+}
+
+.sub {
+    font-size: 30px;
+}
+
+.box_list {
+    width: 330px;
+    border-top: 1px solid rgba(224, 224, 224, 1);
+    margin-top: 30px;
+}
+
+.sub_title {
+    font-size: 14px;
+    color: rgba(33, 33, 33, 1);
+    font-weight: 700;
+}
+
+.list {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(155, 159, 170, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.button {
+    border: none;
+    border-radius: 30px;
+    background: #fc842d;
+    width: 210px;
+    height: 43px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
+    padding: 5px;
+}
+
+@media only screen and (max-width: 759px) {
+    .modal {
+        width: 320px;
+        height: 400px;
+        padding: 10px;
+    }
+
+    .title {
+        display: none;
+    }
+
+    .title_movil {
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+        width: 280px;
+        height: 50px;
+    }
+
+    .number {
+        font-size: 30px;
+        color: rgba(38, 64, 97, 1);
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .sub {
+        font-size: 16px;
+    }
+
+    .box_list {
+        width: 280px;
+    }
+
+    .sub_title {
+        margin: 0;
+        width: 280px;
+        height: 17px;
+        font-size: 12px;
+    }
+
+    .list {
+        font-size: 12px;
+    }
+
+    .button {
+        border: none;
+        width: 150px;
+        height: 35px;
+        font-weight: 700;
+        font-size: 10px;
+    }
+}
