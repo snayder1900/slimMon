@@ -6,32 +6,21 @@ import Modal from "../components/Modal";
 import { getDataModal } from "../services/slimmomApi";
 
 const DailyCaloriesForm = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const [formData, setFormData] = useState({
-    height: "",
-    age: "",
-    currentWeight: "",
-    desiredWeight: "",
-    bloodType: "",
-  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [dailyRateInfo, setDailyRateInfo] = useState(0);
   const [notAllowed, setNotAllowed] = useState([]);
-  const formHandle = async (event) => {
-    event.preventDefault();
+
+  const formHandle = async (values) => {
     try {
-      const { result } = await getDataModal("products", formData);
+      const { result } = await getDataModal("products", values);
       setDailyRateInfo(result.dailyRate);
       setNotAllowed(result.notAllowedProducts);
+      console.log("datos obtenidos:", result);
     } catch (error) {
       console.error("error al enviar datos:", error.message);
     }
   };
-  const handleChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
+
   const clickHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -48,46 +37,47 @@ const DailyCaloriesForm = () => {
           desiredWeight: "",
           bloodType: "",
         }}
-        validate={(values) => {
-          let errors = {};
-          const validateNumber = /^\d+$/;
+        //se comento esta validación porque se presentan problemas y no se envian los datos com debe al servidor.//
+        // validate={(values) => {
+        //   let errors = {};
+        //   const validateNumber = /^\d+$/;
 
-          if (!values.height) {
-            errors.height = "Por favor diligenciar la altura";
-          } else if (!validateNumber.test(values.height)) {
-            errors.height = "Campo debe ser numerico";
-          }
-          if (!values.age) {
-            errors.age = "Por favor diligenciar la edad ";
-          } else if (!validateNumber.test(values.age)) {
-            errors.age = "Campo debe ser numerico";
-          }
+        //   if (!values.height) {
+        //     errors.height = "Por favor diligenciar la altura";
+        //   } else if (!validateNumber.test(values.height)) {
+        //     errors.height = "Campo debe ser numerico";
+        //   }
+        //   if (!values.age) {
+        //     errors.age = "Por favor diligenciar la edad ";
+        //   } else if (!validateNumber.test(values.age)) {
+        //     errors.age = "Campo debe ser numerico";
+        //   }
 
-          if (!values.currentWeight) {
-            errors.currentWeight = "Por favor diligenciar peso actual ";
-          } else if (!validateNumber.test(values.currentWeight)) {
-            errors.currentWeight = "Campo debe ser numerico";
-          }
+        //   if (!values.currentWeight) {
+        //     errors.currentWeight = "Por favor diligenciar peso actual ";
+        //   } else if (!validateNumber.test(values.currentWeight)) {
+        //     errors.currentWeight = "Campo debe ser numerico";
+        //   }
 
-          if (!values.desiredWeight) {
-            errors.desiredWeight = "Por favor diligenciar peso deseado ";
-          } else if (!validateNumber.test(values.desiredWeight)) {
-            errors.desiredWeight = "Campo debe ser numerico";
-          }
+        //   if (!values.desiredWeight) {
+        //     errors.desiredWeight = "Por favor diligenciar peso deseado ";
+        //   } else if (!validateNumber.test(values.desiredWeight)) {
+        //     errors.desiredWeight = "Campo debe ser numerico";
+        //   }
 
-          if (!values.picked) {
-            errors.picked = "Por favor diligenciar tipo de sangre";
-          }
+        //   if (!values.picked) {
+        //     errors.picked = "Por favor diligenciar tipo de sangre";
+        //   }
 
-          return errors;
-        }}
+        //   return errors;
+        // }}
         onSubmit={(values, { resetForm }) => {
-          formHandle();
+          formHandle(values);
           resetForm();
           console.log("formulario enviado");
         }}
       >
-        {({ errors, touched }) => (
+        {({ values, errors, touched }) => (
           <Form>
             <ul className={css.list}>
               <li className={css.listItem}>
@@ -98,15 +88,13 @@ const DailyCaloriesForm = () => {
                       : css.lisContainer
                   }
                 >
-                  <label className={css.label} htmlFor="">
+                  <label className={css.label} htmlFor="height">
                     Altura *
                   </label>
                   <Field
                     type="text"
                     className={css.inputMobile}
                     name="height"
-                    value={formData.height}
-                    onChange={handleChange}
                   />
                 </div>
               </li>
@@ -118,16 +106,10 @@ const DailyCaloriesForm = () => {
                       : css.lisContainer
                   }
                 >
-                  <label className={css.label} htmlFor="">
+                  <label className={css.label} htmlFor="age">
                     Edad *
                   </label>
-                  <Field
-                    type="text"
-                    className={css.inputMobile}
-                    name="age"
-                    value={formData.age}
-                    onChange={handleChange}
-                  />
+                  <Field type="text" className={css.inputMobile} name="age" />
                 </div>
               </li>
               <li className={css.listItem}>
@@ -138,15 +120,13 @@ const DailyCaloriesForm = () => {
                       : css.lisContainer
                   }
                 >
-                  <label className={css.label} htmlFor="">
+                  <label className={css.label} htmlFor="currentWeight">
                     Peso actual *
                   </label>
                   <Field
                     type="text"
                     className={css.inputMobile}
                     name="currentWeight"
-                    value={formData.currentWeight}
-                    onChange={handleChange}
                   />
                 </div>
               </li>
@@ -158,22 +138,19 @@ const DailyCaloriesForm = () => {
                       : css.lisContainer
                   }
                 >
-                  <label className={css.label} htmlFor="">
+                  <label className={css.label} htmlFor="desiredWeight">
                     Peso deseado *
                   </label>
                   <Field
                     type="text"
                     className={css.inputMobile}
                     name="desiredWeight"
-                    value={formData.desiredWeight}
-                    onChange={handleChange}
                   />
                 </div>
               </li>
               <li>
                 <div className={css.lisContainer__blood}>
-                  <div
-                    id="my-radio-group"
+                  <label
                     className={`${css.label} ${
                       touched.picked && errors.picked
                         ? css.label__blood_error
@@ -181,49 +158,28 @@ const DailyCaloriesForm = () => {
                     }`}
                   >
                     Tipo de sangre *
-                  </div>
+                  </label>
                   <div
                     role="group"
-                    aria-labelledby="my-radio-group"
+                    aria-labelledby="bloodType"
                     className={css.inputMobile__bloodContainer}
                   >
-                    <label className={`${css.label}`}>
-                      <Field
-                        type="radio"
-                        name="bloodType"
-                        value="One"
-                        className={css.inputMobile__blood}
-                      />
-                      1
-                    </label>
-                    <label className={`${css.label}`}>
-                      <Field
-                        type="radio"
-                        name="bloodType"
-                        value="Two"
-                        className={css.inputMobile__blood}
-                      />
-                      2
-                    </label>
-                    <label className={`${css.label}`}>
-                      <Field
-                        type="radio"
-                        name="bloodType"
-                        value="Three"
-                        className={css.inputMobile__blood}
-                      />
-                      3
-                    </label>
-                    <label className={`${css.label}`}>
-                      <Field
-                        type="radio"
-                        name="bloodType"
-                        value="Four"
-                        className={css.inputMobile__blood}
-                      />
-                      4
-                    </label>
+                    {[1, 2, 3, 4].map((value) => (
+                      <label key={value} className={`${css.label}`}>
+                        <Field
+                          type="radio"
+                          name="bloodType"
+                          value={value}
+                          checked={values.bloodType === String(value)}
+                          className={css.inputMobile__blood}
+                        />
+                        {value}
+                      </label>
+                    ))}
                   </div>
+                  {errors.bloodType && touched.bloodType && (
+                    <div>{errors.bloodType}</div>
+                  )}
                 </div>
               </li>
               {Object.keys(errors).length > 0 && (

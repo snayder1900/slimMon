@@ -78,15 +78,17 @@
     width: 330px;
     border-top: 1px solid rgba(224, 224, 224, 1);
     margin-top: 30px;
+    padding-top: 10px;
 }
 
 .sub_title {
     font-size: 14px;
     color: rgba(33, 33, 33, 1);
     font-weight: 700;
+    margin-bottom: 20px;
 }
 
-.list {
+.list_products {
     font-size: 14px;
     font-weight: 400;
     color: rgba(155, 159, 170, 1);
