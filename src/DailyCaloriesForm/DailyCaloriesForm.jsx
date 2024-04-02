@@ -38,39 +38,39 @@ const DailyCaloriesForm = () => {
           bloodType: "",
         }}
         //se comento esta validación porque se presentan problemas y no se envian los datos com debe al servidor.//
-        // validate={(values) => {
-        //   let errors = {};
-        //   const validateNumber = /^\d+$/;
+        validate={(values) => {
+          let errors = {};
+          const validateNumber = /^\d+$/;
 
-        //   if (!values.height) {
-        //     errors.height = "Por favor diligenciar la altura";
-        //   } else if (!validateNumber.test(values.height)) {
-        //     errors.height = "Campo debe ser numerico";
-        //   }
-        //   if (!values.age) {
-        //     errors.age = "Por favor diligenciar la edad ";
-        //   } else if (!validateNumber.test(values.age)) {
-        //     errors.age = "Campo debe ser numerico";
-        //   }
+          if (!values.height) {
+            errors.height = "Por favor diligenciar la altura";
+          } else if (!validateNumber.test(values.height)) {
+            errors.height = "Campo debe ser numerico";
+          }
+          if (!values.age) {
+            errors.age = "Por favor diligenciar la edad ";
+          } else if (!validateNumber.test(values.age)) {
+            errors.age = "Campo debe ser numerico";
+          }
 
-        //   if (!values.currentWeight) {
-        //     errors.currentWeight = "Por favor diligenciar peso actual ";
-        //   } else if (!validateNumber.test(values.currentWeight)) {
-        //     errors.currentWeight = "Campo debe ser numerico";
-        //   }
+          if (!values.currentWeight) {
+            errors.currentWeight = "Por favor diligenciar peso actual ";
+          } else if (!validateNumber.test(values.currentWeight)) {
+            errors.currentWeight = "Campo debe ser numerico";
+          }
 
-        //   if (!values.desiredWeight) {
-        //     errors.desiredWeight = "Por favor diligenciar peso deseado ";
-        //   } else if (!validateNumber.test(values.desiredWeight)) {
-        //     errors.desiredWeight = "Campo debe ser numerico";
-        //   }
+          if (!values.desiredWeight) {
+            errors.desiredWeight = "Por favor diligenciar peso deseado ";
+          } else if (!validateNumber.test(values.desiredWeight)) {
+            errors.desiredWeight = "Campo debe ser numerico";
+          }
 
-        //   if (!values.picked) {
-        //     errors.picked = "Por favor diligenciar tipo de sangre";
-        //   }
+          if (!values.bloodType) {
+            errors.bloodType = "Por favor diligenciar tipo de sangre";
+          }
 
-        //   return errors;
-        // }}
+          return errors;
+        }}
         onSubmit={(values, { resetForm }) => {
           formHandle(values);
           resetForm();
@@ -152,7 +152,7 @@ const DailyCaloriesForm = () => {
                 <div className={css.lisContainer__blood}>
                   <label
                     className={`${css.label} ${
-                      touched.picked && errors.picked
+                      touched.bloodType && errors.bloodType
                         ? css.label__blood_error
                         : css.label__blood
                     }`}
@@ -177,9 +177,6 @@ const DailyCaloriesForm = () => {
                       </label>
                     ))}
                   </div>
-                  {errors.bloodType && touched.bloodType && (
-                    <div>{errors.bloodType}</div>
-                  )}
                 </div>
               </li>
               {Object.keys(errors).length > 0 && (
@@ -192,7 +189,12 @@ const DailyCaloriesForm = () => {
               <button
                 onClick={clickHandler}
                 type="submit"
-                className={css.loseWeightBtn}
+                className={
+                  Object.keys(errors).length > 0
+                    ? css.loseWeightBtn__disable
+                    : css.loseWeightBtn
+                }
+                disabled={Object.keys(errors).length > 0 ? true : false}
               >
                 Empezar a perder peso
               </button>

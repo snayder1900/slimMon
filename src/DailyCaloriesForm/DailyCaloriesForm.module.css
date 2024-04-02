@@ -155,6 +155,23 @@ form {
     box-shadow: 0 6px 8px 0 rgb(252, 132, 45, 0.2), 0 6px 20px 0 rgb(252, 132, 45, 0.19);
 }
 
+.loseWeightBtn__disable {
+    background-color: #E8C1A5;
+    margin-top: 40px;
+    padding-top: 14px;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 14px;
+    border-radius: 30px;
+    border-style: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: #7E7D7C;
+    box-shadow: 0 6px 8px 0 rgb(252, 132, 45, 0.2), 0 6px 20px 0 rgb(252, 132, 45, 0.19);
+}
+
 @media (min-width:767px) {
     .container {
         min-width: 768px;
