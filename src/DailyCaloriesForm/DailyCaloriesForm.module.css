@@ -1,0 +1,290 @@
+.container {
+    min-width: 320px;
+    width: 100%;
+}
+
+.tittle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    width: 75%;
+    margin-top: 32px;
+    margin-bottom: 34px;
+}
+
+form {
+    width: 75%;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+}
+
+.lisContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: solid;
+    border-color: #E0E0E0;
+    border-width: 1px;
+}
+
+.lisContainer_error {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: solid;
+    border-color: red;
+    border-width: 1px;
+}
+
+.label {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: #9B9FAA;
+    flex: 0 0 auto;
+}
+
+.label_error {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: rgb(179, 28, 28);
+    flex: 0 0 auto;
+}
+
+.inputMobile {
+    border: none;
+    outline: none;
+    flex: 1;
+    margin-left: 10px;
+    background-color: transparent;
+}
+
+.lisContainer__blood {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputMobile__bloodContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputMobile__blood {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 8px;
+}
+
+.inputMobile__blood::before,
+.inputMobile__blood::after {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.inputMobile__blood::before {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+}
+
+.inputMobile__blood:checked::before {
+    background-color: #FC842D;
+}
+
+.inputMobile__blood::after {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #E0E0E0;
+}
+
+.inputMobile__blood:checked::after {
+    border-color: #E0E0E0;
+}
+
+.inputMobile__bloodContainer__option {
+    display: flex;
+    align-items: center;
+}
+
+.inputMobile__blood:checked+.label {
+    color: #FC842D;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.loseWeightBtn {
+    background-color: #FC842D;
+    margin-top: 40px;
+    padding-top: 14px;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 14px;
+    border-radius: 30px;
+    border-style: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+    box-shadow: 0 6px 8px 0 rgb(252, 132, 45, 0.2), 0 6px 20px 0 rgb(252, 132, 45, 0.19);
+}
+
+.loseWeightBtn__disable {
+    background-color: #E8C1A5;
+    margin-top: 40px;
+    padding-top: 14px;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 14px;
+    border-radius: 30px;
+    border-style: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: #7E7D7C;
+    box-shadow: 0 6px 8px 0 rgb(252, 132, 45, 0.2), 0 6px 20px 0 rgb(252, 132, 45, 0.19);
+}
+
+@media (min-width:767px) {
+    .container {
+        min-width: 768px;
+        width: 100%;
+    }
+
+    .tittle {
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 34px;
+        width: 54.6875%;
+        margin-top: 9.765625%;
+        margin-bottom: 6.640625%;
+    }
+
+    form {
+        width: 66.66666667%;
+    }
+
+    .list {
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 300px;
+        column-gap: 32px;
+    }
+
+    .listItem {
+        width: 50%;
+        margin-bottom: 40px;
+    }
+
+    .lisContainer {
+        padding-bottom: 20px;
+    }
+
+    .lisContainer_error {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding-bottom: 8px;
+        border-bottom: solid;
+        border-color: red;
+        border-width: 1px;
+        padding-bottom: 20px;
+    }
+
+    .label__blood {
+        padding-bottom: 20px;
+        border-bottom: solid;
+        border-color: #E0E0E0;
+        border-width: 1px;
+        width: 100%;
+    }
+
+    .label__blood_error {
+        padding-bottom: 20px;
+        border-bottom: solid;
+        border-color: red;
+        border-width: 1px;
+        width: 100%;
+    }
+
+    .buttonContainer {
+        justify-content: flex-start;
+    }
+}
+
+@media (min-width:1279px) {
+    .container {
+        min-width: 1279px;
+        width: 100%;
+    }
+
+    .tittle {
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 34px;
+        width: 47.5%;
+        margin-top: 100px;
+        margin-bottom: 68px;
+    }
+
+    form {
+        width: 40%;
+    }
+
+    .list {
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 300px;
+        column-gap: 32px;
+    }
+
+    .listItem {
+        width: 50%;
+        margin-bottom: 40px;
+    }
+
+    .lisContainer {
+        padding-bottom: 20px;
+    }
+
+    .label__blood {
+        padding-bottom: 20px;
+        border-bottom: solid;
+        border-color: #E0E0E0;
+        border-width: 1px;
+        width: 100%;
+    }
+
+    .buttonContainer {
+        justify-content: flex-end;
+    }
+}
