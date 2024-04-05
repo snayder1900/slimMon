@@ -1,7 +1,8 @@
 import { useState } from "react";
-import "./App.css";
+import css from "./addProduct.module.css";
 import Calendario from "./calendario";
 import Modal from './mobilemenu'
+import { sendFormData, getProductsByQuery } from "../services/apiService"
 
 const AddProduct = () => {
   const [alimentos, setAlimentos] = useState([
@@ -12,41 +13,79 @@ const AddProduct = () => {
     { id: 5, nombre: "Arroz", gramos: 50, calorias: 130 },
   ]);
 
-  const handleCreateProducts = (e) => {
+  const handleCreateProducts = async (e) => {
     e.preventDefault();
     const { nombre, gramos } = e.target.elements;
     const productName = nombre.value.toLowerCase();
-    const existingProductIndex = alimentos.findIndex(
-      (item) => item.nombre.toLowerCase() === productName
-    );
-  
-    if (existingProductIndex !== -1) {
-      const updatedAlimentos = [...alimentos];
-      updatedAlimentos[existingProductIndex] = {
-        ...updatedAlimentos[existingProductIndex],
-        gramos: updatedAlimentos[existingProductIndex].gramos + parseInt(gramos.value),
-        calorias: calculateCalories(productName, updatedAlimentos[existingProductIndex].gramos + parseInt(gramos.value), updatedAlimentos)
-      };
-      setAlimentos(updatedAlimentos);
-    } else {
-      const newProduct = {
-        id: alimentos.length + 1,
-        nombre: nombre.value,
-        gramos: parseInt(gramos.value),
-        calorias: calculateCalories(productName, parseInt(gramos.value), alimentos)
-      };
-      setAlimentos((prevState) => [...prevState, newProduct]);
+
+    try {
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MGRmZjg3ZDhhYTczYWM5NzhkZjk0MiIsImlhdCI6MTcxMjI2NzUyNCwiZXhwIjoxNzEyMzEwNzI0fQ.fj_Ob-R87k0LOCmFNVDLKytdqJCRk6oSQG0BppqROxI";
+      const response = await getProductsByQuery(
+        `products/query?title=${productName}`,
+        token
+      );
+      const productInfo = response.data[0];
+
+      // Calcular las calorías
+      const calories = calculateCalories(
+        productInfo.calories,
+        parseInt(gramos.value)
+      );
+
+      const currentDate = new Date();
+      const formattedDate = `${currentDate
+        .getDate()
+        .toString()
+        .padStart(2, "0")}.${(currentDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}.${currentDate.getFullYear()}`;
+      console.log("Fecha actual:", formattedDate);
+      // Enviar información al servidor
+      await sendFormData(
+        "dailyCalories",
+        {
+          weight: parseInt(gramos.value),
+          product: productName,
+          date: formattedDate,
+          calories: calories,
+        },
+        token
+      );
+
+      // Actualizar el estado de los alimentos
+      const existingProductIndex = alimentos.findIndex(
+        (item) => item.nombre.toLowerCase() === productName
+      );
+      if (existingProductIndex !== -1) {
+        const updatedAlimentos = [...alimentos];
+        updatedAlimentos[existingProductIndex] = {
+          ...updatedAlimentos[existingProductIndex],
+          gramos:
+            updatedAlimentos[existingProductIndex].gramos +
+            parseInt(gramos.value),
+          calorias: updatedAlimentos[existingProductIndex].calorias + calories,
+        };
+        setAlimentos(updatedAlimentos);
+      } else {
+        const newProduct = {
+          id: alimentos.length + 1,
+          nombre: productName,
+          gramos: parseInt(gramos.value),
+          calorias: calories,
+        };
+        setAlimentos((prevState) => [...prevState, newProduct]);
+      }
+
+      nombre.value = "";
+      gramos.value = "";
+    } catch (error) {
+      console.error("Error al enviar datos:", error);
     }
-    nombre.value = "";
-    gramos.value = "";
   };
- 
-  const calculateCalories = (nombre, gramos, alimentos) => {
-    const alimento = alimentos.find(item => item.nombre.toLowerCase() === nombre.toLowerCase()); 
-    if (alimento) {
-      return Math.round((alimento.calorias * gramos) / alimento.gramos);
-    }
-    return 0;
+
+  const calculateCalories = (caloriasPor100g, gramos) => {
+    return Math.round((caloriasPor100g * gramos) / 100);
   };
 
   const handleDeleteProduct = (id) => {
@@ -56,7 +95,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className={css.container}> {/* Utiliza la clase CSS importada desde el módulo */}
+    <div className={css.container}> 
     <nav className={css.navContainer}>
         <img
           src="/assets/logo.png"
